@@ -1,0 +1,143 @@
+.formular {
+}
+
+.event {
+	vertical-align: bottom;
+}
+
+.benutzer {
+}
+
+
+.ok {
+	text-align: center;
+	color: #343434;
+	background-color: #7FFF00;
+}
+
+.nicht {
+	text-align: center;
+	color: #343434;
+}
+
+.anzahltest {
+	background-color: #d3d3d3;
+	color: #343434;
+}
+
+.genug {
+	text-align: center;
+	background-color: #d3d3d3;
+	color: #343434;
+}
+
+.wenig {
+	text-align: center;
+	background-color: #d3d3d3;
+	color: #343434;
+}
+
+.textfeld
+{
+	border: 1px solid #d3d3d3;
+	background-color: #d3d3d3;
+}
+
+.menu{
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+
+a.loeschen{
+	display:block;
+	width:11em;
+	padding:0.2em;
+	background-color: #FF3f3f;
+	color: #343434;
+	//background-color: #343434;
+	//color: #7FFF00;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+a.nicht{
+	display:block;
+	width:11em;
+	padding:0.2em;
+	background-color: #343434;
+	color: #343434;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+a{
+	display:block;
+	width:11em;
+	padding:0.2em;
+	background-color: #d3d3d3;
+	color: #343434;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+body
+{
+	background-color: #343434;
+	color: #d3d3d3;
+	margin: left;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
+td
+{
+	background-color: #343434;
+	border: 1px solid #d3d3d3;
+	color: #d3d3d3;
+	padding: 0.3em;
+	margin: 0em;
+	width: 12em;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration:none;	
+}
+
+tr
+{
+	color: #d3d3d3;
+	padding: 0.3em;
+	margin: 0em;
+	width: 12em;
+	font-size: 0.8em
+}
+
+table
+{
+	cellpadding: 0;
+	cellspacing: 0;
+}
+
+.yellow
+{
+	color: yellow;
+	text-style: bold;
+}
+
+.lime
+{
+	background-color: lime;
+}
+
+.pink
+{
+	color: fuchsia;
+}
