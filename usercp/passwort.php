@@ -25,6 +25,7 @@ require_once "../includes/functions.php";
 					WHERE ID = ".$_SESSION['ID']." 
 					LIMIT 1" ;
 			$result = $db->query($sql);
+			$_SESSION['password'] = $passwort;
 			header('Location:index.php');
 		}else{
 			die("Die Passwörter stimmen nicht überein");

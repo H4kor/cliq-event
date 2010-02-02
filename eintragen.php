@@ -11,7 +11,7 @@ You should have received a copy of the GNU General Public License along with thi
 //eintragen.php
 if(!access(0))die();
 ?>
-<form target="_blank" action="import.php" method="post">
+<form target="_blank" action="import_eintragen.php" method="post">
 Event<br>
 <input type="text" size="17" name="event"><br>
 Ort<br>

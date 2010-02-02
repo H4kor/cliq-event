@@ -47,9 +47,10 @@ CREATE TABLE IF NOT EXISTS `teilnahmen` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `BENUTZERID` int(11) NOT NULL,
   `EVENTID` int(11) NOT NULL,
+  `DATUM` date NOT NULL,
   `TEILNAHME` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 ";
 
 $result = $db->query($sql);
@@ -58,5 +59,26 @@ if (!$result) {
 	var_dump($db, $result);   
 }else
 	echo "Teilnahmetabelle wurde erfolgreich angelegt!<br>";
+	
+	
+$sql =
+"
+CREATE TABLE IF NOT EXISTS `kommentare` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `EVENTID` int(11) NOT NULL,
+  `BENUTZERID` int(11) NOT NULL,
+  `KOMMENTAR` text NOT NULL,
+  `DATUM` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+";
 
+$result = $db->query($sql);
+if (!$result) {
+    die ('Datenbankfehler: '.$db->error);
+	var_dump($db, $result);   
+}else
+	echo "Kommentartabelle wurde erfolgreich angelegt!<br>";
+
+	
 ?>

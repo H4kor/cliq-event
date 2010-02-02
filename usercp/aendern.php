@@ -11,11 +11,11 @@ You should have received a copy of the GNU General Public License along with thi
 //usercp/aendern.php
 ob_start();
 session_start();
-if($_SESSION['RECHTE'] == 1){
+if($_SESSION['RECHTE'] != -1){
 	include "../includes/dbconnect.php";
 	include "../includes/functions.php";
 
-				$sql = "UPDATE `clique`.`events` 
+				$sql = "UPDATE `events` 
 					SET `EVENT` = '".$_POST['event']."',
 						`ORT` = '".$_POST['ort']."',
 						`DATUM` = '".$_POST['datum']."',

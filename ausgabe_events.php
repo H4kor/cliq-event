@@ -41,7 +41,7 @@ $benutzer_flip_array = array_flip($benutzer_array);
 //Formular in die erste Zelle
 $tabelle[0][0] = "
 <td class='formular'>
-<form action=\"import.php\" method=\"post\" name=\"input\">
+<form action=\"import_event.php\" method=\"post\" name=\"input\">
 Event<br>
 <input type=\"text\" class=\"textfeld\" size=\"17\" name=\"event\"><br>
 Ort<br>
@@ -99,7 +99,7 @@ for($i=0;$i<$anzahl_events;$i++){
 	$result = get_table_where("teilnahmen", "*", "EVENTID = ".$events_array[$i]['ID']." 
 												  AND BENUTZERID = ".$benutzer_flip_array[$_SESSION['name']]."");
 	if (!$result->num_rows) {
-		$event_string = $event_string."<a href=\"teilnehmen.php?event=".$events_array[$i]['ID']."\" >teilnehmen</a>\n";
+		$event_string = $event_string."<a href=\"anmelden.php?event=".$events_array[$i]['ID']."\" >teilnehmen</a>\n";
 	}else{
 		$event_string = $event_string."<a href=\"abmelden.php?event=".$events_array[$i]['ID']."\" >abmelden</a>\n";
 	}

@@ -5,6 +5,7 @@ session_start();
 include "includes/dbconnect.php";
 include "includes/functions.php";
 if(access(0)){
+	$heute = date("Y-m-d");
 	$result = get_table_where("teilnahmen", "*", "BENUTZERID = '".$_SESSION['ID']."' 
 											  AND EVENTID = '".$_GET['event']."'");
 	if($result->num_rows == 1){
@@ -23,3 +24,4 @@ if(access(0)){
 	header('Location:index.php');
 }
 ?>
+

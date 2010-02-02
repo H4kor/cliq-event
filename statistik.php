@@ -36,13 +36,13 @@ while ($row = $result->fetch_assoc()) {
 	$result2 = get_table_where("teilnahmen", "*", "`BENUTZERID` = ".$row['ID']." ");
 	$benutzer_array[$row['ID']]['teilnahmen']=$result2->num_rows;
 	
-	$date_diff_array = timeDiff($heute, $row['LAST_LOGIN']);
+	$alt = strtotime($row['LAST_LOGIN']) ;
+	$aktuell = strtotime($heute) ;
+	$differenz = $aktuell - $alt;
+	$differenz = $differenz / 86400;
 
 	$benutzer_array[$row['ID']]['last_login']= "";
-	if($date_diff_array['month'] != 0)
-		$benutzer_array[$row['ID']]['last_login'] .= $date_diff_array['month']." Monate, ";
-	
-	$benutzer_array[$row['ID']]['last_login'] .= $date_diff_array['day']." Tage";
+	$benutzer_array[$row['ID']]['last_login'] .= $differenz." Tage";
 		
 }
 

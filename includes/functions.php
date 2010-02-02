@@ -70,27 +70,6 @@ function update_timestamp($id){
 
 }
 
-function timeDiff($ts1, $ts2) {
-  if ($ts1 < $ts2) {
-    $temp = $ts1;
-    $ts1 = $ts2;
-    $ts2 = $temp;
-  }
-  $format = 'Y-m-d H:i:s';
-  $ts1 = date_parse(date($format, $ts1));
-  $ts2 = date_parse(date($format, $ts2));
-  $arrBits = explode('|', 'year|month|day|hour|minute|second');
-  $arrTimes = array(0, 12, date("t", $temp), 24, 60, 60);
-  foreach ($arrBits as $key => $bit) {
-    $diff[$bit] = $ts1[$bit] - $ts2[$bit];
-    if ($diff[$bit] < 0) {
-      $diff[$arrBits[$key - 1]]--;
-      $diff[$bit] = $arrTimes[$key] - $ts2[$bit] + $ts1[$bit];
-    }
-  }
-  return $diff;
-}
-
 function access($rechte) {
 	global $db;
 	if(isset($_SESSION['ID']) && isset($_SESSION['name']) && isset($_SESSION['rechte']) && isset($_SESSION['password']) && $_SESSION['status'] == "logged_in") {
