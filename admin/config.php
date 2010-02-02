@@ -29,9 +29,11 @@ session_start();
 <a class="menu" href="../index.php">Zurück</a>
 <div style="float:left">
 <p> </p>
+<!--
 <h2> Konfiguration </h2>
 
-<h4>Dein Passwort ändern </h4>
+
+<h4>Email-Einstellung</h4>
 
 <td class='formular'>
 <form action="set_config.php" method="post" name="input">
@@ -44,6 +46,7 @@ SMTP-Server:<br>
 <br>
 <input type="submit" value="OK">
 </form>
+-->
 <br>
 </body>
 </html>

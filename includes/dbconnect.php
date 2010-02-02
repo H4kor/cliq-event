@@ -9,7 +9,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
 // includes/dbconnect.php
-require_once("constant_db.php");
+require_once("constant.php");
 $db = @new mysqli('localhost', DBUSER, DBPASSWORD, DBNAME);
 if (mysqli_connect_errno()) {
     die ('Konnte keine Verbindung zur Datenbank aufbauen: '.mysqli_connect_error().'('.mysqli_connect_errno().')');
