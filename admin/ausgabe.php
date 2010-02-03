@@ -16,10 +16,16 @@ You should have received a copy of the GNU General Public License along with thi
 $seite = "Admin";
 include "../static/header.html"; 
 ?>
-<?php
-include "benutzer_verwalten.php";
-include "config.php";
-?>
+
+<a class="menu" href="../index.php">Zurück</a>
+
+<h2 align="center">Admin Panel</h2>
+
+<div align="center"> 
+	<a href="config.php">Konfiguration ändern</a>
+	<a href="benutzer_verwalten.php">Benutzer verwalten</a>
+</div>
+
 
 </body>
 </html>

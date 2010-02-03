@@ -11,34 +11,33 @@ You should have received a copy of the GNU General Public License along with thi
 //admin/config.php
 
 session_start();
+require_once "../includes/dbconnect.php";
+require_once "../includes/functions.php";
+require_once "../includes/constant.php";
+
 ?>
 
+<?php 
+//header einfügen
+$seite = "Konfiguration";
+include "../static/header.html"; 
+?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//DE" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
-<html>
-<head>
-	<meta name="robots" content="noindex">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script language="JavaScript" src="../calendar_db.js"></script>
-	<link rel="stylesheet" href="../calendar.css">
-	
-	<title><?php echo TITEL; ?> - Admin - Konfiguration </title>
-</head>
-<body>
-<a class="menu" href="../index.php">Zurück</a>
+<a class="menu" href="index.php">Zurück</a>
 <div style="float:left">
 <p> </p>
-<!--
+
 <h2> Konfiguration </h2>
-
-
-<h4>Email-Einstellung</h4>
 
 <td class='formular'>
 <form action="set_config.php" method="post" name="input">
 Titel:<br>
 <input type="text" class="textfeld" size="17" name="title" value="<?php echo TITEL; ?>"><br>
+	
+	<div>Datenbank:</div><input class="textfeld" type="text" size="32" name="dbname" value="<?php echo DBNAME; ?>"><br>
+	<div>Datenbanknutzer:</div><input class="textfeld" type="text" size="32" name="dbuser"  value="<?php echo DBUSER; ?>"><br>
+	<div>Datenbankpasswort:</div><input class="textfeld" type="password" size="32" name="dbpassword" value="<?php echo DBPASSWORD; ?>"><br>
+	
 Haupt-Email-Adresse:<br>
 <input type="text" class="textfeld" size="17" name="email" value="<?php echo MAIN_EMAIL; ?>"><br>
 SMTP-Server:<br>
@@ -46,7 +45,7 @@ SMTP-Server:<br>
 <br>
 <input type="submit" value="OK">
 </form>
--->
+
 <br>
 </body>
 </html>

@@ -9,6 +9,8 @@ define('TITEL', '".$titel."');
 define('DBNAME', '".$dbname."');
 define('DBUSER', '".$dbuser."');
 define('DBPASSWORD', '".$dbpassword."');
+define('SMTP', '".$smtp."');
+define('MAIN_EMAIL', '".$email."');
 ?>
 ";
 $dateihandle = fopen("../includes/constant.php","w");

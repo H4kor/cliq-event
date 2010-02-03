@@ -16,6 +16,8 @@ $dbuser = $_POST["dbuser"];
 $dbpassword = $_POST["dbpassword"];
 $adminname = $_POST["adminname"];
 $adminpassword = $_POST["adminpassword"];
+$email = $_POST["email"]; 
+$smtp = $_POST["smtp"]; 
 
 if($dbname != "" && $dbuser != "" && $adminname != "" && $adminpassword != "" && $titel != "")
 {

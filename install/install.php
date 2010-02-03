@@ -38,8 +38,13 @@
 	<div>Adminname:</div><input class="textfeld" type="text" size="32" name="adminname"><br>
 	<div>Adminpasswort:</div><input class="textfeld" type="text" size="32" name="adminpassword"><br>
 	
-	<hr>
+	<hr>	
 	
+	<div>Hauptemail*:</div><input class="textfeld" type="text" size="32" name="email"><br>
+	<div>SMTP-Server*:</div><input class="textfeld" type="text" size="32" name="smtp"><br>
+	
+	<hr>
+	<div>* ist optional</div>
 	<input type="submit" name="Name" value="Erstellen">
 </form>
 

@@ -8,6 +8,13 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
+session_start();
+require_once "../includes/dbconnect.php";
+require_once "../includes/functions.php";
+require_once "../includes/constant.php";
+
+ 
+
 if(!access(1)) die();
 	//admin/benutzer_verwalten.php
 
@@ -58,8 +65,15 @@ if(!access(1)) die();
 
 	$ausgabe .= "</table>";
 
+	//header einfügen
+$seite = "Benutzer verwalten";
+include "../static/header.html"; 
+
 ?>
 
+<a class="menu" href="index.php">Zurück</a>
+<div style="float:left">
+<p> </p>
 
 <p> </p>
 <h2> Benutzerliste </h2>
@@ -75,6 +89,8 @@ if(!access(1)) die();
 </form>
 
 
+</body>
+</html>
 
 
 
