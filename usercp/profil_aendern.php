@@ -8,7 +8,7 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
-//usercp/passwort.php
+//usercp/profil_aendern.php
 
 ob_start();
 session_start();
@@ -17,22 +17,17 @@ require_once "../includes/functions.php";
 
 if(!access(0)) die();
 
-	$result = get_table_where("benutzer", "*", "ID = ".$_SESSION['ID']." AND PASSWORT = '".md5($_POST['alt'])."'");
+	$result = get_table_where("benutzer", "*", "ID = ".$_SESSION['ID']." ");
 	if ($result->num_rows) {
-		if(isset($_POST['neu']) && $_POST['neu'] == $_POST['nochmal']){
 			$passwort = md5($_POST['neu']);
 			$sql = "UPDATE benutzer 
-					SET PASSWORT = '".$passwort."' 
+					SET ICQ = '".$_POST['icq']."' 
 					WHERE ID = ".$_SESSION['ID']." 
 					LIMIT 1" ;
 			$result = $db->query($sql);
-			$_SESSION['password'] = $passwort;
 			header('Location:index.php');
-		}else{
-			die("Die Passwörter stimmen nicht überein");
-		}
 	}else{
-		die("Das alte Passwort wurde falsch eingegeben");
+		die("Es ein Fehler unterlaufen");
 	}
 
 

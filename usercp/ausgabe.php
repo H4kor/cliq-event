@@ -59,6 +59,14 @@ for($i=0;$i<$anzahl_events;$i++){
 	$tabelle[] = $event_string;
 }
 
+//Status
+$results = get_table_where("benutzer", "STATUS", "ID = '".$_SESSION['ID']."'");
+
+while ($row = $results->fetch_assoc()) {
+	$status = $row['STATUS'];
+}
+
+
 //Ausgabe
 ?>
 
@@ -76,6 +84,13 @@ include "../static/header.html";
 
 <p> </p>
 <h2> User-Control-Panel </h2>
+
+
+<form action="update_profil.php" method="post" name="input">
+Dein Status:<input type="text" class="textfeld" size="140" name="status" value="<?php echo $status ?>">
+<input type="submit" value="OK">
+</form>
+
 <h4> Deine angemeldeten Events</h4>
 <table border="10">
 <?php
@@ -86,30 +101,9 @@ echo"<tr>\n";
 echo"</tr>\n";
 ?>
 </table>
-
-<h4>Dein Passwort ändern </h4>
-
-<td class='formular'>
-<form action="passwort.php" method="post" name="input">
-Altes Passwort:
-<input type="password" class="textfeld" size="17" name="alt"><br>
-Neues Passwort:
-<input type="password" class="textfeld" size="17" name="neu"><br>
-Wiederholen:
-<input type="password" class="textfeld" size="17" name="nochmal"><br>
 <br>
-<input type="submit" value="OK">
-</form>
-<br>
-<h4>Email-Adresse ändern</h4>
+<div  align="center"><a href="edit_profil.php">Profil bearbeiten</a></div>
 
-<td class='formular'>
-<form action="email_aendern.php" method="post" name="input">
-Email-Adresse:
-<input type="text" class="textfeld" size="17" name="email"><br>
-<br>
-<input type="submit" value="OK">
-</form>
 
 </body>
 </html>

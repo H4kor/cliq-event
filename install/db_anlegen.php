@@ -10,8 +10,10 @@ CREATE TABLE IF NOT EXISTS `benutzer` (
   `EMAIL` varchar(128) NOT NULL,
   `RECHTE` int(11) NOT NULL,
   `LAST_LOGIN` date NOT NULL,
+  `ICQ` varchar(12) NOT NULL,
+  `STATUS` varchar(140) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 ";
 
 $result = $db->query($sql);

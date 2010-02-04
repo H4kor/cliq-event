@@ -24,7 +24,7 @@ if(access(0)){
 	if($event != "" && $ort != "" && $datum != "" && $teilnehmer != "")
 	{
 		$sql = "INSERT 
-				INTO events (EVENT, ORT, DATUM, ANZAHL, UHRZEIT, ANMERKUNG, BESITZERID) 
+				INTO events (EVENT, ORT, DATUM, ANZAHL, UHRZEIT, ANMERKUNG, BESITZERID) 
 				VALUES (?, ?, '".$datum."', ?, ?, ?, '".$besitzerid."')";
 	    $stmt = $db->prepare($sql);
 	    if (!$stmt) {
@@ -35,6 +35,17 @@ if(access(0)){
 	        die ('Query konnte nicht ausgeführt werden: '.$stmt->error);
 	    }
 	}
-	header('Location:index.php');
-}
+//coming soon	
+/* 	$empfaenger = '';
+	$betreff = 'Neues Event ';
+	$nachricht = 'Event: '.$event.'!\ '.
+				'Ort: '.$ort.'!\ '.
+				'Datum: '.$datum.'!\ '.
+				'Uhrzeit: '.$uhrzeit.'!\ '.
+				'Anmerkung: '.$anmerkung.'!\ ';
+
+	mail($empfaenger, $betreff, $nachricht);
+ */
+ header('Location:index.php');
+ }
 ?>

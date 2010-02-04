@@ -71,7 +71,7 @@ Anzahl der Teilnehmer<br>
 
 //Benutzer in die erste Spalte ab 2. Zeile
 foreach ($benutzer_array as $benutzer):
-	$tabelle[][0] = "<td class='benutzer'>".$benutzer."</td>";
+	$tabelle[][0] = "<td class='benutzer'><a href='ausgabe_profil.php?user=".$benutzer_flip_array[$benutzer]."'>".$benutzer."</a></td>";
 endforeach;
 	$tabelle[][0] = "<td class='anzahltest'>Anzahl Teilnehmer</td>";
 	$tabelle[][0] = "<td class='anzahltest'>Kommentare</td>";
