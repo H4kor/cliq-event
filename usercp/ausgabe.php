@@ -41,7 +41,7 @@ for($i=0;$i<$anzahl_events;$i++){
 					<div class='anmerkung'><b class='yellow'>Anmerkung:<br> </b>".$events_array[$i]['ANMERKUNG']."</div><br>\n";
 	
 	//Löschbutton einfügen
-	$event_string = $event_string."<a class=\"loeschen\" href=\"../loeschen.php?event=".$events_array[$i]['ID']."\" >LÖSCHEN</a>";
+	$event_string = $event_string."<a class=\"loeschen\" href=\"../functions/loeschen.php?event=".$events_array[$i]['ID']."\" >LÖSCHEN</a>";
 	//Bearbeiten einfügen
 	$event_string = $event_string."<a href=\"aendern_form.php?event=".$events_array[$i]['ID']."\" >Bearbeiten</a>";
 	//Rundmail einfügen

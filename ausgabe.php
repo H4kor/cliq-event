@@ -40,9 +40,6 @@ $tabelle = array();
 //Fügt die Events, Benutzer, Teilnahmen in die Tabelle ein
 include "ausgabe_events.php";
 
-//Fügt die Kommentare in die Tabelle ein
-include "ausgabe_kommentare.php";
-
 //Anzahl der angezeigten Events anzeigen
 if($anzahl_events > 5 && !isset($_GET['more']))
 	$anzahl_events = 5;

@@ -7,19 +7,12 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */s
-//eintragen.php
-if(!access(0))die();
+You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
+//logout
+ob_start();
+session_start();
+session_unset();
+session_destroy();
+
+header('Location:../index.php');
 ?>
-<form target="_blank" action="import_eintragen.php" method="post">
-Event<br>
-<input type="text" size="17" name="event"><br>
-Ort<br>
-<input type="text" size="17" name="ort"><br>
-Datum<br>
-<input type="text" size="17" name="datum"><br>
-Anzahl der Teilnehmer<br>
-<input type="text" size="17" name="teilnehmer">
-<br><br>
-<input type="submit" value="OK">
-</form>

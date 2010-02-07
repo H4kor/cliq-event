@@ -63,7 +63,7 @@ include "static/header.html";
 <h4>Kommentar schreiben</h4>
 
 <td class='formular'>
-<form action="import_kommentar.php?id= <?php echo $_GET['id'] ?> " method="post" name="input">
+<form action="functions/import_kommentar.php?id= <?php echo $_GET['id'] ?> " method="post" name="input">
 Kommentar<br>
 <textarea cols="40" rows="5" class="textfeld" name="kommentar">
 Hier Kommentar schreiben

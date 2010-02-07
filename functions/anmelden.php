@@ -2,8 +2,8 @@
 //teilnehmen.php
 ob_start();
 session_start();
-include "includes/dbconnect.php";
-include "includes/functions.php";
+include "../includes/dbconnect.php";
+include "../includes/functions.php";
 if(access(0)){
 	$heute = date("Y-m-d");
 	$result = get_table_where("teilnahmen", "*", "BENUTZERID = '".$_SESSION['ID']."' 
@@ -21,7 +21,7 @@ if(access(0)){
 		}
 			var_dump($db, $result);   
 	}
-	header('Location:index.php');
+	header('Location:../index.php');
 }
 ?>
 

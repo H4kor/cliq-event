@@ -5,7 +5,7 @@ session_start();
 
 require_once "includes/dbconnect.php";
 require_once "includes/functions.php";
-require_once "includes/constant.php";
+
 
 //Datum herrausfinden
 date_default_timezone_set("Europe/Paris");

@@ -10,8 +10,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
 ob_start();
 session_start();
-include "includes/dbconnect.php";
-include "includes/functions.php";
+include "../includes/dbconnect.php";
+include "../includes/functions.php";
 if(access(0)){
 	$sql = 'DELETE 
 				FROM events 
@@ -24,6 +24,6 @@ if(access(0)){
 
 	var_dump($db, $result);   
 	}
-	header('Location:index.php');
+	header('Location:../index.php');
 }
 ?>
