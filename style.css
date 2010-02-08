@@ -5,10 +5,6 @@
 	vertical-align: bottom;
 }
 
-.benutzer {
-}
-
-
 .ok {
 	text-align: center;
 	color: #343434;
@@ -69,6 +65,19 @@ a.nicht{
 	width:11em;
 	padding:0.2em;
 	background-color: #343434;
+	color: #343434;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+a.benutzer_away {
+	display:block;
+	width:11em;
+	padding:0.2em;
+	background-color: #ff9393;
 	color: #343434;
 	font-style: normal;
 	font-weight: normal;

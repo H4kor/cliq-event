@@ -17,6 +17,7 @@ while ($row = $results->fetch_assoc()) {
 	$rechte = $row['RECHTE'];
 	$icq = $row['ICQ'];
 	$status = $row['STATUS'];
+	$away = $row['AWAY'];
 }
 
 if($rechte == 1)
@@ -37,6 +38,12 @@ include "static/header.html";
 <a class="menu" href="index.php">Zurück</a>
 
 <h2 align="">Profil von <?php echo $user ?></h2>
+<?php if($away == 1){ ?>
+	<div>Ist zur Zeit abwesend</div>
+<?php } ?>
+
+
+
 <h5><?php echo $status ?></h5><hr>
 <div> Rang: <?php echo $rang ?></div> <br>
 <div> Email: <?php echo $email ?> </div> <br>

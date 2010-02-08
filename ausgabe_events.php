@@ -30,12 +30,13 @@ $anzahl_benutzer = $result->num_rows;
 $userids = array();
 $userids[] = -1000;
 while ($row = $result->fetch_assoc()) {
-	$benutzer_array[$row['ID']]=$row['NAME'];
+	$benutzer_array[$row['ID']]=$row;
+	$benutzer_array_to_flip[$row['ID']]=$row['NAME'];
 	$userids[] = $row['ID'];
 }
 
 //Array kopieren jedoch Schlüssel und Inhalt vertauschen
-$benutzer_flip_array = array_flip($benutzer_array);
+$benutzer_flip_array = array_flip($benutzer_array_to_flip);
 
 
 //Formular in die erste Zelle
@@ -71,7 +72,10 @@ Anzahl der Teilnehmer<br>
 
 //Benutzer in die erste Spalte ab 2. Zeile
 foreach ($benutzer_array as $benutzer):
-	$tabelle[][0] = "<td class='benutzer'><a href='ausgabe_profil.php?user=".$benutzer_flip_array[$benutzer]."'>".$benutzer."</a></td>";
+	if($benutzer['AWAY'] == 0)
+		$tabelle[][0] = "<td><a href='ausgabe_profil.php?user=".$benutzer_flip_array[$benutzer['NAME']]."'>".$benutzer['NAME']."</a></td>";
+	else
+		$tabelle[][0] = "<td><a  class='benutzer_away' href='ausgabe_profil.php?user=".$benutzer_flip_array[$benutzer['NAME']]."'>".$benutzer['NAME']."</a></td>";
 endforeach;
 	$tabelle[][0] = "<td class='anzahltest'>Anzahl Teilnehmer</td>";
 	$tabelle[][0] = "<td class='anzahltest'>Kommentare</td>";

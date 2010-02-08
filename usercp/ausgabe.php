@@ -31,13 +31,12 @@ while ($row = $result->fetch_assoc()) {
 }
 
 for($i=0;$i<$anzahl_events;$i++){
-	
-	
+		
 	$event_string = "<td class='event'><b class='yellow'>Event:<br> </b></font>".$events_array[$i]['EVENT']."<br>\n
 					<b class='yellow'>Ort:<br> </b>".$events_array[$i]['ORT']."<br><br>\n
 					<b class='yellow'>Datum: </b>".date( "d.m.y", strtotime($events_array[$i]['DATUM']))."<br>\n
 					<b class='yellow'>Uhrzeit:<br> </b>".$events_array[$i]['UHRZEIT']."<br><br>\n
-					<b class='yellow'>erford. Teilnehmer: </b>".$events_array[$i]['teilnahmen']." / ".$events_array[$i]['ANZAHL']."<br><br>\n
+					<b class='yellow'>erford. Teilnehmer: </b><br>".$events_array[$i]['teilnahmen']." / ".$events_array[$i]['ANZAHL']."<br><br>\n
 					<div class='anmerkung'><b class='yellow'>Anmerkung:<br> </b>".$events_array[$i]['ANMERKUNG']."</div><br>\n";
 	
 	//Löschbutton einfügen
@@ -60,10 +59,11 @@ for($i=0;$i<$anzahl_events;$i++){
 }
 
 //Status
-$results = get_table_where("benutzer", "STATUS", "ID = '".$_SESSION['ID']."'");
+$results = get_table_where("benutzer", "STATUS, AWAY", "ID = '".$_SESSION['ID']."'");
 
 while ($row = $results->fetch_assoc()) {
 	$status = $row['STATUS'];
+	$away =  $row['AWAY'];
 }
 
 
@@ -87,8 +87,10 @@ include "../static/header.html";
 
 
 <form action="update_profil.php" method="post" name="input">
-Dein Status:<input type="text" class="textfeld" size="140" name="status" value="<?php echo $status ?>">
-<input type="submit" value="OK">
+	Dein Status:
+	<input type="text" class="textfeld" size="140" name="status" value="<?php echo $status ?>">
+	<br><input type="checkbox" <?php if($away == 1)echo "checked" ?> name="away" value="1"> Abwesend?
+	<br><input type="submit" value="OK">
 </form>
 
 <h4> Deine angemeldeten Events</h4>
