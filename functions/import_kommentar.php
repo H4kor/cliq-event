@@ -16,7 +16,8 @@ if(access(0)){
 
 	if($_GET['id'] != "" && $_POST['kommentar'] != "")
 	{
-	    $sql = 'INSERT INTO
+		$kommentar = str_replace("\n", "<br>", $_POST['kommentar']);
+		$sql = 'INSERT INTO
 	                kommentare(EVENTID, BENUTZERID, KOMMENTAR)
 	            VALUES
 	                ('.$_GET['id'].','.$_SESSION['ID'].' , ?)';
@@ -24,7 +25,7 @@ if(access(0)){
 	    if (!$stmt) {
 	        die ('Es konnte kein SQL-Query vorbereitet werden: '.$db->error);
 	    }
-	    $stmt->bind_param('s', $_POST['kommentar']);
+	    $stmt->bind_param('s', $kommentar);
 	    if (!$stmt->execute()) {
 	        die ('Query konnte nicht ausgeführt werden: '.$stmt->error);
 	    }

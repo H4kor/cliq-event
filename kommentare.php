@@ -47,18 +47,12 @@ $seite = "Kommentare";
 include "static/header.html"; 
 
 ?>
-<!-- TinyMCE -->
-<script type="text/javascript" src="jscripts/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
-	tinyMCE.init({
-		mode : "textareas",
-		theme : "simple"
-	});
-</script>
-<!-- /TinyMCE -->
-
 
 <h2>Kommentare zu <?php echo $event; ?></h2>
+
+<div class="menu">
+	<a href="index.php">Zurück</a>
+</div>
 
 <h4>Kommentar schreiben</h4>
 
