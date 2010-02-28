@@ -17,7 +17,8 @@ while ($row = $result->fetch_assoc()) {
 	$result2 = get_table_where("teilnahmen", "*", "EVENTID = ".$row['ID']."");
 	//Abfrage der Beteiligung
 	while ($row2 = $result2->fetch_assoc()) {
-		$events_array[$counter]["Teilnehmer"][$row2['BENUTZERID']] = $row2['DATUM'];
+		$events_array[$counter]["Teilnehmer"][$row2['BENUTZERID']] = array("datum" 	=> $row2['DATUM'],
+																		   "ok" 	=> $row2['TEILNAHME']);
 	}
 	$counter++;	
 }
@@ -103,7 +104,8 @@ for($i=0;$i<$anzahl_events;$i++){
 	$result = get_table_where("teilnahmen", "*", "EVENTID = ".$events_array[$i]['ID']." 
 												  AND BENUTZERID = ".$benutzer_flip_array[$_SESSION['name']]."");
 	if (!$result->num_rows) {
-		$event_string = $event_string."<a href=\"functions/anmelden.php?event=".$events_array[$i]['ID']."\" >teilnehmen</a>\n";
+		$event_string = $event_string."<a class=\"ja\" href=\"functions/anmelden.php?event=".$events_array[$i]['ID']."&set=1\" >JA</a>\n";
+		$event_string = $event_string."<a class=\"nein\" href=\"functions/anmelden.php?event=".$events_array[$i]['ID']."&set=-1\" >NEIN</a>\n";
 	}else{
 		$event_string = $event_string."<a href=\"functions/abmelden.php?event=".$events_array[$i]['ID']."\" >abmelden</a>\n";
 	}
@@ -119,8 +121,12 @@ $event_string = $event_string."</td>";
 	$anzahl_teilnahmen = 0;
 	for($k=1;$k<=$anzahl_benutzer;$k++){
 		if(isset($events_array[$i]['Teilnehmer'][$userids[$k]])){
-			$tabelle[$k][$i+1]="<td class='ok'>OK ".date( "d.m.y", strtotime($events_array[$i]['Teilnehmer'][$userids[$k]]))."</td>\n";
-			$anzahl_teilnahmen++;
+			if($events_array[$i]['Teilnehmer'][$userids[$k]]['ok'] == 1){
+				$tabelle[$k][$i+1]="<td class='ok'>JA ".date( "d.m.y", strtotime($events_array[$i]['Teilnehmer'][$userids[$k]]['datum']))."</td>\n";
+				$anzahl_teilnahmen++;
+			}else{
+				$tabelle[$k][$i+1]="<td class='not_ok'>NEIN ".date( "d.m.y", strtotime($events_array[$i]['Teilnehmer'][$userids[$k]]['datum']))."</td>\n";
+			}
 		}else{
 			$tabelle[$k][$i+1]="<td class='nicht'> </td>\n";
 		}

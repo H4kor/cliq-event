@@ -15,8 +15,9 @@ $events_array		->Array mit Daten der ausgelesenen Events
 						->ANZAHL
 						->ANMERKUNG
 						->BESITZERID
-						->Teilnehmer(Array)
-							->Schlüssel und Inhalt = ID des Teilnehmers
+						->Teilnehmer(Array) ->Schlüssel = ID des Teilnehmers
+												->datum
+												->1 oder -1 für Teilnahme oder Absage
 $benutzer_array		->Array  mit Namen aller Benutzer
 					Key = ID des Benutzers
 					Inhalt = Name des Benutzer

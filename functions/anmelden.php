@@ -14,7 +14,7 @@ if(access(0)){
 		$sql = 'INSERT INTO
 	            teilnahmen(BENUTZERID, EVENTID, TEILNAHME, DATUM)
 				VALUES
-					("'.$_SESSION['ID'].'","'.$_GET['event'].'","1", "'.$heute.'");';
+					("'.$_SESSION['ID'].'","'.$_GET['event'].'","'.$_GET['set'].'", "'.$heute.'");';
 		$result = $db->query($sql);
 		if (!$result) {
 	    die ('Etwas stimmte mit dem Query nicht: '.$db->error);

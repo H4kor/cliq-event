@@ -11,6 +11,13 @@
 	background-color: #7FFF00;
 }
 
+.not_ok {
+	text-align: center;
+	color: #343434;
+	background-color: #FF7F00;
+}
+
+
 .nicht {
 	text-align: center;
 	color: #343434;
@@ -91,6 +98,34 @@ a{
 	width:11em;
 	padding:0.2em;
 	background-color: #d3d3d3;
+	color: #343434;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+a.ja{
+	float:left;
+	display:block;
+	width:5em;
+	padding:0.2em;
+	background-color: #d3FFd3;
+	color: #343434;
+	font-style: normal;
+	font-weight: normal;
+	border:1px solid #343434;
+	text-align: center;
+	text-decoration:none;
+}
+
+a.nein{
+	float:right;
+	display:block;
+	width:5em;
+	padding:0.2em;
+	background-color: #FFd3d3;
 	color: #343434;
 	font-style: normal;
 	font-weight: normal;
