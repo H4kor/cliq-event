@@ -83,10 +83,9 @@ endforeach;
 	
 //Events in die erste Zeile ab 2.Spalte	
 for($i=0;$i<$anzahl_events;$i++){
-	
 	$event_string = "<td class='event'><b class='yellow'>Event: </b></font>".$events_array[$i]['EVENT']."<br>\n
 					<b class='yellow'>Ort: </b>".$events_array[$i]['ORT']."<br><br>\n
-					<b class='yellow'>Initiator: </b>".$benutzer_array[$events_array[$i]['BESITZERID']]."<br><br>\n
+					<b class='yellow'>Initiator: </b>".$benutzer_array[$events_array[$i]['BESITZERID']]["NAME"]."<br><br>\n
 					<b class='yellow'>Datum: </b>".date( "d.m.y", strtotime($events_array[$i]['DATUM']))."<br>\n
 					<b class='yellow'>Uhrzeit: </b>".$events_array[$i]['UHRZEIT']."<br><br>\n
 					<b class='yellow'>erford. Teilnehmer: </b>".$events_array[$i]['ANZAHL']."<br><br>\n

@@ -82,4 +82,18 @@ function access($rechte) {
 		}else return false;		
 	}else return false;
 }
+
+function get_name($id){
+	global $db;
+	$sql = 'SELECT
+				NAME
+			FROM
+				benutzer
+			WHERE `ID` = '.$id.'';
+	$result = $db->query($sql);
+	while ($row = $result->fetch_assoc()) { 
+		$name = $row["NAME"];
+	}
+	return $name;
+}
 ?>

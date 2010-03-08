@@ -1,13 +1,4 @@
 <?php
-/* Clique-Eventplaner - Ein Eventplaner für Cliquen und und andere kleine Gruppen. 
-
-Copyright (C) 2009 Niko Abeler
-
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
 
 
 //statistik.php
@@ -34,7 +25,7 @@ switch ($_GET['sort_by']) {
 		$sort_after = "events";
 		$sort = "ID ASC";
 		break;
-	case "events":
+	case "teilnahme":
 		$sort_after = "teilnahme";
 		$sort = "ID ASC";
 		break;
@@ -67,7 +58,6 @@ while ($row = $result->fetch_assoc()) {
 		
 }
 
-
 $temp_benutzer_array = array();
 
 if($sort_after == "events"){
@@ -84,22 +74,21 @@ if($sort_after == "events"){
 			$benutzer_array[$max_id]['events'] = -1;
 	}
 	$benutzer_array = $temp_benutzer_array;
-	var_dump($benutzer_array);
-}elseif($sort_after == "events"){
+}
+if($sort_after == "teilnahme"){
 	for($i = 0; $i < $anzahl_benutzer; $i++){
 		$max = -1;
 		$max_id = -1;	
 		foreach ($benutzer_array as $benutzer):
-			if($benutzer['events'] > $max){
-				$max = $benutzer['events'];
+			if($benutzer['teilnahmen'] > $max){
+				$max = $benutzer['teilnahmen'];
 				$max_id = $benutzer['id'];
 			}
 		endforeach;
 			$temp_benutzer_array[$max_id] = $benutzer_array[$max_id];
-			$benutzer_array[$max_id]['events'] = -1;
+			$benutzer_array[$max_id]['teilnahmen'] = -1;
 	}
 	$benutzer_array = $temp_benutzer_array;
-	var_dump($benutzer_array);
 }
 
 

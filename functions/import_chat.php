@@ -1,27 +1,31 @@
 <?php
-//functios/import_kommentar.php
+//functios/import_chat.php
 ob_start();
 session_start();
 include "../includes/dbconnect.php";
 include "../includes/functions.php";
 if(access(0)){
 
-	if($_GET['id'] != "" && $_POST['kommentar'] != "")
+	if($_POST['text'] != "")
 	{
-		$kommentar = str_replace("\n", "<br>", $_POST['kommentar']);
+		if(isset($_GET['re_id']))
+			$re_id = $_GET['re_id'];
+		else
+			$re_id = -1;
+		$text = str_replace("\n", "<br>", $_POST['text']);
 		$sql = 'INSERT INTO
-	                kommentare(EVENTID, BENUTZERID, KOMMENTAR)
+	                chat(RE_TO, OWNER_ID, TEXT)
 	            VALUES
-	                ('.$_GET['id'].','.$_SESSION['ID'].' , ?)';
+	                ('.$re_id.','.$_SESSION['ID'].' , ?)';
 	    $stmt = $db->prepare($sql);
 	    if (!$stmt) {
 	        die ('Es konnte kein SQL-Query vorbereitet werden: '.$db->error);
 	    }
-	    $stmt->bind_param('s', $kommentar);
+	    $stmt->bind_param('s', $text);
 	    if (!$stmt->execute()) {
 	        die ('Query konnte nicht ausgeführt werden: '.$stmt->error);
 	    }
 	}
-	header('Location:../index.php');
+	header('Location:../chat.php?re_id=-1');
 }
 ?>
