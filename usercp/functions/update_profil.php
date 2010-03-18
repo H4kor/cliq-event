@@ -8,21 +8,31 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
-//login.php
+//usercp/update_profil.php
+
+ob_start();
+session_start();
+require_once "../../includes/dbconnect.php";
+require_once "../../includes/functions.php";
+
+if(!access(0)) die();
+	var_dump($_POST['away']);
+	if(isset($_POST['away']))
+		$away = 1;
+	else
+		$away = 0;
+	$result = get_table_where("benutzer", "*", "ID = ".$_SESSION['ID']." ");
+	if ($result->num_rows) {
+			$passwort = md5($_POST['neu']);
+			$sql = "UPDATE benutzer 
+					SET `STATUS` =  '".$_POST['status']."',
+						`AWAY` = '".$away."'
+					WHERE ID = ".$_SESSION['ID']." 
+					LIMIT 1" ;
+			$result = $db->query($sql);
+			header('Location:../index.php');
+	}else{
+		die("Es ein Fehler unterlaufen");
+	}
+
 ?>
-<?php 
-//header einfügen
-$seite = "Login";
-include "static/header.html"; 
-?>
-
-
-<h2> Bitte einloggen um Zugang zum Portal zu erhalten </h2>
-
-<form action="index.php" method="POST">
-	<div>Name:</div><input class="textfeld" type="text" size="32" name="name">
-	<div>Passwort:</div><input class="textfeld" type="password" size="32" name="password"><br>
-	<input type="submit" name="Name" value="Login">
-</form>
-</body>
-</html>

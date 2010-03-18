@@ -5,27 +5,8 @@ session_start();
 
 require_once "includes/dbconnect.php";
 require_once "includes/functions.php";
-require_once "includes/constant.php";
 
 if(!access(0))die();
-
-/*
-$output = array
-	->Name
-	->Text
-	->Date
-	->RE array
-		->Name
-		->Text
-		->Date
-		->RE array
-			->...
-*/
-
-$output = array(); 
-
-include "output_chat.php";
-
 function output_chat($array, $count, $id){
 	$chat_id = $array[$id]['id'];
 	$chat_name = $array[$id]['name'];
@@ -42,30 +23,48 @@ function output_chat($array, $count, $id){
 	} 
 }
 
-?>
-
-<?php
-//header einfügen
-$seite = "Chat";
-include "static/header.html"; 
-
-?>
-
-<div class="menu">
-	<a href="index.php">Zurück</a>
-</div>
-
-<h2>Chat</h2>
-
-<?php 
-if($_GET['re_id'] == -1){
-	include("templates/chat_formular.php");
-	output_chat($output, 0, 0); 
-}else{
-	include("templates/chat_formular.php");
+function get_re($ids){
+	$result = get_table_where_order("chat", "*", "`RE_TO` = ".$ids."", "`DATE` ASC");
+	if($result->num_rows != 0){
+		while ($row = $result->fetch_assoc()) {  
+			$re[] = array(		'id' => $row["ID"],
+								'name' => get_name($row["OWNER_ID"]),
+								'text' => $row["TEXT"],
+								'date' => $row["DATE"],
+								'RE' => get_re($row["ID"]));
+		}
+		return $re;
+	}else{
+		return "";
+	}
 }
+
+
+$output = array(); 
+/*
+$output = array
+	->Name
+	->Text
+	->Date
+	->RE array
+		->Name
+		->Text
+		->Date
+		->RE array
+			->...
+*/
+
+	$result = get_table_where_order("chat", "*", "`RE_TO` = -1", "`DATE` DESC");
+	while ($row = $result->fetch_assoc()) {  
+		$output[] = array(	'id' => $row["ID"],
+							'name' => get_name($row["OWNER_ID"]),
+							'text' => $row["TEXT"],
+							'date' => $row["DATE"],
+							'RE' => get_re($row["ID"]));	
+	}
+
+	//OUTPUT
+	include("templates/chat.php");
 ?>
 
 
-</body>
-</html>

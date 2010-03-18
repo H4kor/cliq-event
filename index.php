@@ -1,6 +1,6 @@
 <?php
 // index.php
-
+ob_start();
 session_start();
 
 require_once "includes/dbconnect.php";
@@ -37,10 +37,10 @@ if($_SESSION['status'] == "failed"){
 }
 
 if(!isset($_SESSION['name']) && !isset($_SESSION['password'])){
-	include "login.php";
+	include "templates/login.php";
 }else{
 	if($_SESSION['status'] == "logged_in"){
-		include "ausgabe.php";
+		header('Location:eventplaner.php');
 		update_timestamp($_SESSION['ID']);
 	}
 }

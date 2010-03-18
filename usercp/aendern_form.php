@@ -26,13 +26,13 @@ if($event['BESITZERID'] != $_SESSION['ID'])
 <?php 
 //header einfügen
 $seite = "Eventplaner";
-include "../static/header.html"; 
+include "../templates/overall_header.php"; 
 ?>
 
 <h2> User-Control-Panel </h2>
 <h4> Event bearbeiten</h4>
 
-<form action="aendern.php" method="post" name="input">
+<form action="functions/aendern.php" method="post" name="input">
 <input type="hidden" value="<?php echo $_GET['event']; ?>" class="textfeld" size="17" name="id">
 <table>
 <tr>

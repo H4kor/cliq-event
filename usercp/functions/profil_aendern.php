@@ -8,12 +8,12 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
-//usercp/email_aendern.php
+//usercp/profil_aendern.php
 
 ob_start();
 session_start();
-require_once "../includes/dbconnect.php";
-require_once "../includes/functions.php";
+require_once "../../includes/dbconnect.php";
+require_once "../../includes/functions.php";
 
 if(!access(0)) die();
 
@@ -21,11 +21,11 @@ if(!access(0)) die();
 	if ($result->num_rows) {
 			$passwort = md5($_POST['neu']);
 			$sql = "UPDATE benutzer 
-					SET EMAIL = '".$_POST['email']."' 
+					SET ICQ = '".$_POST['icq']."' 
 					WHERE ID = ".$_SESSION['ID']." 
 					LIMIT 1" ;
 			$result = $db->query($sql);
-			header('Location:index.php');
+			header('Location:../index.php');
 	}else{
 		die("Es ein Fehler unterlaufen");
 	}

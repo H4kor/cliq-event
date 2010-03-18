@@ -1,6 +1,4 @@
 <?php
-
-
 //statistik.php
 
 session_start();
@@ -8,6 +6,7 @@ session_start();
 include "includes/dbconnect.php";
 include "includes/functions.php";
 if(!access(0))die();
+
 //Datum herrausfinden
 date_default_timezone_set("Europe/Paris");
 $heute = date("Y-m-d");
@@ -37,7 +36,7 @@ $result = get_table("benutzer", "*", $sort);
 
 $benutzer_array = array();
 $anzahl_benutzer = $result->num_rows;
-//$userids[] = -1000;
+
 while ($row = $result->fetch_assoc()) {
 	$benutzer_array[$row['ID']]['id']=$row['ID'];
 	$benutzer_array[$row['ID']]['name']=$row['NAME'];
@@ -91,61 +90,8 @@ if($sort_after == "teilnahme"){
 	$benutzer_array = $temp_benutzer_array;
 }
 
+//OUTPUT
+include ("templates/statistics.php");
 
 ?>
 
-<?php 
-//header einfügen
-$seite = "Eventplaner";
-include "static/header.html"; 
-?>
-
-
-<h2 align="center"> Statistik </h2>
-Heute ist der : <?php echo date( "d.m.y", strtotime($heute)); ?>
-<table border="10">
-<tr>
-	<td>
-		<a href="statistik.php?sort_by=name">Name</a>
-	</td>
-	<td>
-		<a href="statistik.php?sort_by=login">Zeit seit letztem Login</a>
-	</td>
-	<td>
-		<a href="statistik.php?sort_by=events">gestartete Events</a>
-	</td>
-	<td>
-		<a href="statistik.php?sort_by=teilnahme">Teilnahmen</a>
-	</td>
-</tr>
-
-<?php
-foreach ($benutzer_array as $benutzer):
-?>
-<tr>
-	<td>
-		<?php echo $benutzer['name']; ?>
-	</td>
-	<td>
-		<?php echo $benutzer['last_login']; ?>
-	</td>
-	<td>
-		<?php echo $benutzer['events']; ?>
-	</td>
-	<td>
-		<?php echo $benutzer['teilnahmen']; ?>
-	</td>
-</tr>
-<?php
-endforeach;
-?>
-
-</table>
-<br>
-
-<div class="menu">
-<a href="index.php">Zurück</a>
-</div>
-
-</body>
-</html>

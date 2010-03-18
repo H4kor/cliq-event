@@ -10,18 +10,20 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
 ob_start();
 session_start();
+include "../../includes/dbconnect.php";
+include "../../includes/functions.php";
+if(access(0)){
+	$sql = 'DELETE 
+				FROM events 
+				WHERE BESITZERID = '.$_SESSION['ID'].'
+					AND ID = '.$_GET['event'].'
+				LIMIT 1';
+	$result = $db->query($sql);
+	if (!$result) {
+    die ('Etwas stimmte mit dem Query nicht: '.$db->error);
 
-	require_once "../includes/dbconnect.php";
-	require_once "../includes/functions.php";
-if(access(1)){
-	if($_POST['name'] != "" && $_POST['password'] != "")
-	{
-		$sql = "INSERT INTO benutzer (NAME, PASSWORT, RECHTE, EMAIL) VALUES ('".$_POST['name']."', '".md5($_POST['password'])."', '0', '".$_POST['email']."')";
-		$result = $db->query($sql);
-		if (!$result)
-			die ('Etwas stimmte mit dem Query nicht: '.$db->error);
+	var_dump($db, $result);   
 	}
-	header('Location:index.php');
-}else
-die("KEIN MISSBRAUCH!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	header('Location:../index.php');
+}
 ?>

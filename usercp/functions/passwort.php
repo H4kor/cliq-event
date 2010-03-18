@@ -12,8 +12,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 ob_start();
 session_start();
-require_once "../includes/dbconnect.php";
-require_once "../includes/functions.php";
+require_once "../../includes/dbconnect.php";
+require_once "../../includes/functions.php";
 
 if(!access(0)) die();
 
@@ -27,7 +27,7 @@ if(!access(0)) die();
 					LIMIT 1" ;
 			$result = $db->query($sql);
 			$_SESSION['password'] = $passwort;
-			header('Location:index.php');
+			header('Location:../index.php');
 		}else{
 			die("Die Passwörter stimmen nicht überein");
 		}

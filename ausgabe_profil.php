@@ -32,7 +32,7 @@ else
 <?php 
 //header einfügen
 $seite = "Profil von ".$user;
-include "static/header.html"; 
+include "templates/overall_header.php"; 
 ?>
 
 <a class="menu" href="index.php">Zurück</a>

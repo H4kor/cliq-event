@@ -8,22 +8,29 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. */
+//usercp/email_aendern.php
+
 ob_start();
 session_start();
-include "../includes/dbconnect.php";
-include "../includes/functions.php";
-if(access(0)){
-	$sql = 'DELETE 
-				FROM events 
-				WHERE BESITZERID = '.$_SESSION['ID'].'
-					AND ID = '.$_GET['event'].'
-				LIMIT 1';
-	$result = $db->query($sql);
-	if (!$result) {
-    die ('Etwas stimmte mit dem Query nicht: '.$db->error);
+require_once "../../includes/dbconnect.php";
+require_once "../../includes/functions.php";
 
-	var_dump($db, $result);   
+if(!access(0)) die();
+
+	$result = get_table_where("benutzer", "*", "ID = ".$_SESSION['ID']." ");
+	if ($result->num_rows) {
+			$passwort = md5($_POST['neu']);
+			$sql = "UPDATE benutzer 
+					SET EMAIL = '".$_POST['email']."' 
+					WHERE ID = ".$_SESSION['ID']." 
+					LIMIT 1" ;
+			$result = $db->query($sql);
+			header('Location:../index.php');
+	}else{
+		die("Es ein Fehler unterlaufen");
 	}
-	header('Location:../index.php');
-}
+
+
+
+
 ?>

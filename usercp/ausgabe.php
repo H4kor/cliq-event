@@ -32,30 +32,17 @@ while ($row = $result->fetch_assoc()) {
 
 for($i=0;$i<$anzahl_events;$i++){
 		
-	$event_string = "<td class='event'><b class='yellow'>Event:<br> </b></font>".$events_array[$i]['EVENT']."<br>\n
-					<b class='yellow'>Ort:<br> </b>".$events_array[$i]['ORT']."<br><br>\n
-					<b class='yellow'>Datum: </b>".date( "d.m.y", strtotime($events_array[$i]['DATUM']))."<br>\n
-					<b class='yellow'>Uhrzeit:<br> </b>".$events_array[$i]['UHRZEIT']."<br><br>\n
-					<b class='yellow'>erford. Teilnehmer: </b><br>".$events_array[$i]['teilnahmen']." / ".$events_array[$i]['ANZAHL']."<br><br>\n
-					<div class='anmerkung'><b class='yellow'>Anmerkung:<br> </b>".$events_array[$i]['ANMERKUNG']."</div><br>\n";
-	
-	//Löschbutton einfügen
-	$event_string = $event_string."<a class=\"loeschen\" href=\"../functions/loeschen.php?event=".$events_array[$i]['ID']."\" >LÖSCHEN</a>";
-	//Bearbeiten einfügen
-	$event_string = $event_string."<a href=\"aendern_form.php?event=".$events_array[$i]['ID']."\" >Bearbeiten</a>";
-	//Rundmail einfügen
-/* 	
-	if($events_array[$i]['ANZAHL'] <= $events_array[$i]['teilnahmen'])
-		$event_string = $event_string."<a href=\"rundmail.php?event=".$events_array[$i]['ID']."\" >Teilnehmer informieren</a>";
-	else
-		$event_string = $event_string."<br><br>";
- */	
-	//String beenden
-	$event_string = $event_string."</td>";
+	$event_object = new usercp_event_output($events_array[$i]['EVENT'], 
+											$events_array[$i]['ORT'], 
+											date( "d.m.y", strtotime($events_array[$i]['DATUM'])), 
+											$events_array[$i]['UHRZEIT'], 
+											$events_array[$i]['teilnahmen'],
+											$events_array[$i]['ANZAHL'],
+											$events_array[$i]['ANMERKUNG'],
+											$events_array[$i]['ID']);
 
-	
 	//String in Tabelle einfügen			
-	$tabelle[] = $event_string;
+	$tabelle[] = $event_object;
 }
 
 //Status
@@ -68,44 +55,5 @@ while ($row = $results->fetch_assoc()) {
 
 
 //Ausgabe
+include ("templates/usercp.php");
 ?>
-
-<?php 
-//header einfügen
-$seite = "Eventplaner";
-include "../static/header.html"; 
-?>
-<div class="menu">
-<a href="../index.php">Zurück</a>
-<?php if($_SESSION['rechte'] == 1){ ?>
-	<a href="../admin/index.php">Admin-Panel</a>
-<?php } ?>
-</div>
-
-<p> </p>
-<h2> User-Control-Panel </h2>
-
-
-<form action="update_profil.php" method="post" name="input">
-	Dein Status:
-	<input type="text" class="textfeld" size="140" name="status" value="<?php echo $status ?>">
-	<br><input type="checkbox" <?php if($away == 1)echo "checked" ?> name="away" value="1"> Abwesend?
-	<br><input type="submit" value="OK">
-</form>
-
-<h4> Deine angemeldeten Events</h4>
-<table border="10">
-<?php
-echo"<tr>\n";
-	for($i=0;$i<=$anzahl_events;$i++){
-			echo $tabelle[$i];
-	}
-echo"</tr>\n";
-?>
-</table>
-<br>
-<div  align="center"><a href="edit_profil.php">Profil bearbeiten</a></div>
-
-
-</body>
-</html>
