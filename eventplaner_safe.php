@@ -55,6 +55,7 @@ $tabelle = array();
 //Events abrufen, nur events in der zukunft
 $result = get_table_where_order("events", "*", "`events`.`DATUM` >= '".$heute."'" ,"`events`.`DATUM` ASC");
 
+$anzahl_events = $result->num_rows;
 $events_array = array();
 									
 //Inhalt der Datenbank in ein Array schreiben
@@ -86,7 +87,7 @@ while ($row = $result->fetch_assoc()) {
 		$groups_user[] = $row2['GROUPID'];
 	}
 	$test_groups = array_intersect($groups, $groups_user);
-	if( !empty($test_groups) || $row['ID'] == $_SESSION['ID']){ 
+	if( !empty($test_groups)){ 
 		$benutzer_array[$row['ID']]=$row;
 		$benutzer_array_to_flip[$row['ID']]=$row['NAME'];
 		$userids[] = $row['ID'];
@@ -112,17 +113,16 @@ endforeach;
 	$tabelle[][0] = new comments_headline_output();
 	
 //Events in die erste Zeile ab 2.Spalte	
-foreach($events_array as $event_temp){
+for($i=0;$i<$anzahl_events;$i++){
 	$groups_event = array();
-	$result2 = get_table_where("groups_events", "GROUPID", "EVENTID = ".$event_temp['ID']."");
+	$result2 = get_table_where("groups_events", "GROUPID", "EVENTID = ".$events_array[$i]['ID']."");
 	while ($row2 = $result2->fetch_assoc()) { 
-		$groups_event[] = $row2['GROUPID'];
+		$groups_event[] = $row2['EVENTID'];
 	}
 	$test_groups = array_intersect($groups, $groups_event);
-
 	if( !empty($test_groups)){ 
 		//Teilnehm- und Abmeldebutton festlegen
-		$result = get_table_where("teilnahmen", "*", "EVENTID = ".$event_temp['ID']." 
+		$result = get_table_where("teilnahmen", "*", "EVENTID = ".$events_array[$i]['ID']." 
 													  AND BENUTZERID = ".$benutzer_flip_array[$_SESSION['name']]."");
 		if (!$result->num_rows) {
 			$temp_logged = "FALSE";
@@ -131,44 +131,44 @@ foreach($events_array as $event_temp){
 		}
 		
 		//Objekt in Tabelle einfügen			
-		$tabelle[0][] = new event_output($event_temp['EVENT'], 
-										$event_temp['ORT'], 
-										$benutzer_array[$event_temp['BESITZERID']]["NAME"],
-										date( "d.m.y", strtotime($event_temp['DATUM'])), 
-										$event_temp['UHRZEIT'], 
-										$event_temp['ANZAHL'], 
-										$event_temp['ANMERKUNG'], 
+		$tabelle[0][] = new event_output($events_array[$i]['EVENT'], 
+										$events_array[$i]['ORT'], 
+										$benutzer_array[$events_array[$i]['BESITZERID']]["NAME"],
+										date( "d.m.y", strtotime($events_array[$i]['DATUM'])), 
+										$events_array[$i]['UHRZEIT'], 
+										$events_array[$i]['ANZAHL'], 
+										$events_array[$i]['ANMERKUNG'], 
 										$temp_logged, 
-										$event_temp['ID']);
+										$events_array[$i]['ID']);
 		
 		//Für jeden Benutzer überprüfen ob er teilnimmt und in die Tabelle eintragen
 		//Teilnahmen mitzählen und ans Ende der Tabelle schreiben
 		$anzahl_teilnahmen = 0;
 		for($k=1;$k<=$anzahl_benutzer;$k++){
-			if(isset($event_temp['Teilnehmer'][$userids[$k]])){
-				if($event_temp['Teilnehmer'][$userids[$k]]['ok'] == 1){
-					$tabelle[$k][]=new participation_output("ok", "JA", date( "d.m.y", strtotime($event_temp['Teilnehmer'][$userids[$k]]['datum'])) );
+			if(isset($events_array[$i]['Teilnehmer'][$userids[$k]])){
+				if($events_array[$i]['Teilnehmer'][$userids[$k]]['ok'] == 1){
+					$tabelle[$k][$i+1]=new participation_output("ok", "JA", date( "d.m.y", strtotime($events_array[$i]['Teilnehmer'][$userids[$k]]['datum'])) );
 					$anzahl_teilnahmen++;
 				}else{
-					$tabelle[$k][]=new participation_output("not_ok", "NEIN", date( "d.m.y", strtotime($event_temp['Teilnehmer'][$userids[$k]]['datum'])) );
+					$tabelle[$k][$i+1]=new participation_output("not_ok", "NEIN", date( "d.m.y", strtotime($events_array[$i]['Teilnehmer'][$userids[$k]]['datum'])) );
 				}
 			}else{
-				$tabelle[$k][]=new participation_output("", "", "" );
+				$tabelle[$k][$i+1]=new participation_output("", "", "" );
 			}
 		}
-		if($anzahl_teilnahmen >= $event_temp['ANZAHL']){
-			$tabelle[$k][] = new count_output($anzahl_teilnahmen, "TRUE");
+		if($anzahl_teilnahmen >= $events_array[$i]['ANZAHL']){
+			$tabelle[$k][$i+1] = new count_output($anzahl_teilnahmen, "TRUE");
 		}else{
-			$tabelle[$k][] = new count_output($anzahl_teilnahmen, "FALSE");
+			$tabelle[$k][$i+1] = new count_output($anzahl_teilnahmen, "FALSE");
 		}
 		
-		$result = get_table_where("kommentare", "*", "`EVENTID` = '".$event_temp['ID']."'");
+		$result = get_table_where("kommentare", "*", "`EVENTID` = '".$events_array[$i]['ID']."'");
 
 		$anzahl_kommentare = $result->num_rows;
-		$tabelle[$k+1][] = new comments_link_output($anzahl_kommentare, $event_temp['ID']);
+		$tabelle[$k+1][$i+1] = new comments_link_output($anzahl_kommentare, $events_array[$i]['ID']);
 	}
 }
-
+var_dump($tabelle);
 //Anzahl der angezeigten Events anzeigen
 if($anzahl_events > 5 && !isset($_GET['more']))
 	$anzahl_events = 5;

@@ -13,10 +13,10 @@ Heute ist der : <?php echo date( "d.m.y", strtotime($heute)); ?>
 <table border="10">
 	<?php
 	//Alles ausgeben	
-	for($i=0;$i<=$anzahl_benutzer+2;$i++){
+	foreach($tabelle as $spalte){
 		echo"<tr>\n";
-		for($k=0;$k<=$anzahl_events;$k++){
-			$tabelle[$i][$k]->output();
+		foreach($spalte as $zelle){
+			$zelle->output();
 		}
 		echo"</tr>\n";
 	}
