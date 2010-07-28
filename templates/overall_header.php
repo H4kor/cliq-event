@@ -12,9 +12,18 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>. -->
 <head>
 	<meta name="robots" content="noindex" />
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script language="JavaScript" src="calendar_db.js"></script>
-	<link rel="stylesheet" href="calendar.css" />	
 	<title><?php echo TITEL; ?> - <?php echo $seite;?> </title>
+	<link rel="stylesheet" type="text/css" href="<?php echo MAIN_FOLDER; ?>style.css" />
+
+	<script type="text/javascript" src="<?php echo MAIN_FOLDER; ?>js/jquery.js"></script>
+		
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			$("tr:odd").css({'background' : "#CBC8C6"});
+		});
+
+	</script>
+	
 </head>
 <body>

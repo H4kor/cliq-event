@@ -11,6 +11,7 @@ define('DBUSER', '".$dbuser."');
 define('DBPASSWORD', '".$dbpassword."');
 define('SMTP', '".$smtp."');
 define('MAIN_EMAIL', '".$email."');
+define('MAIN_FOLDER', '".$main_folder."');
 ?>
 ";
 $dateihandle = fopen("../includes/constant.php","w");

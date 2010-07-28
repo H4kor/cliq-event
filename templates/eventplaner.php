@@ -15,15 +15,24 @@ Heute ist der : <?php echo date( "d.m.y", strtotime($heute)); ?>
 	//Alles ausgeben	
 	for($i=0;$i<=$anzahl_benutzer+2;$i++){
 		echo"<tr>\n";
-		for($k=0;$k<=$anzahl_events;$k++){
-			$tabelle[$i][$k]->output();
-		}
+		
+			for($k=0;$k<=$anzeigen;$k++){
+				$tabelle[$i][$k]->output();
+			}
+			
+ 			
+/* 				for($k=$anzeigen+1;$k<=$anzahl_events;$k++){
+					$tabelle[$i][$k]->output();
+				} */			//maybe used for js later
+			
+			
 		echo"</tr>\n";
 	}
 	?>
 </table>
-			<a href="index.php?more= <?php echo $mehr; ?> ">mehr</a>
-			<a href="index.php?more= <?php echo $weniger; ?> ">weniger</a>
+
+			<a href="eventplaner.php?more=<?php echo $mehr; ?> ">mehr</a>
+			<a href="eventplaner.php?more=<?php echo $weniger; ?> ">weniger</a>
 <br>
 <?php include "templates/overall_menu.php"; ?>
 </body>

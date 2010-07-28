@@ -1,8 +1,10 @@
 <?php
-
 session_start();
 require_once "includes/dbconnect.php";
 require_once "includes/functions.php";
+
+echo $_SERVER["SITE_HTMLROOT"];
+
 /*
 $heute			-> Datum von heute
 $anzahl_events		-> Anzahl der augelesenen Events(Alle die in der Zukunft liegen)
@@ -148,15 +150,20 @@ for($i=0;$i<$anzahl_events;$i++){
 }
 
 //Anzahl der angezeigten Events anzeigen
-if($anzahl_events > 5 && !isset($_GET['more']))
-	$anzahl_events = 5;
-if(isset($_GET['more']) && $_GET['more'] < $anzahl_events){
-	$anzahl_events = $_GET['more'];
-	if($anzahl_events < 5)
-		$anzahl_events = 5;
+$anzeigen = 3 ;
+
+if($anzahl_events < $anzeigen && !isset($_GET['more']))
+	$anzeigen = $anzahl_events;
+if(isset($_GET['more'])){
+	$anzeigen = $_GET['more'];
+	if($anzeigen > $anzahl_events)
+		$anzeigen = $anzahl_events;
 }
-$mehr = $anzahl_events+5;
-$weniger = $anzahl_events-5;
+if($anzeigen < 0)
+	$anzeigen = 0;
+
+$mehr = $anzeigen+3;
+$weniger = $anzeigen-3;
 $rolspan = $anzahl_benutzer+2;
 
 

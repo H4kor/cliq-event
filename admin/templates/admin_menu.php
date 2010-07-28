@@ -2,9 +2,10 @@
 //header einfügen
 $seite = "Admin";
 include "../templates/overall_header.php"; 
-?>
 
-<a class="menu" href="../index.php">Zurück</a>
+//menu 
+include "../templates/overall_menu.php";
+?>
 
 <h2 align="center">Admin Panel</h2>
 

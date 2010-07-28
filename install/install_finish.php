@@ -19,6 +19,16 @@ $adminpassword = $_POST["adminpassword"];
 $email = $_POST["email"]; 
 $smtp = $_POST["smtp"]; 
 
+//getting main folder
+$str = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+$arr = explode( "/", $str);
+array_pop($arr);
+array_pop($arr);
+$main_folder = "http://";
+foreach ($arr as $part):
+	$main_folder .= $part."/";
+endforeach;
+
 if($dbname != "" && $dbuser != "" && $adminname != "" && $adminpassword != "" && $titel != "")
 {
 	$db = @new mysqli('localhost', $dbuser, $dbpassword, $dbanme);
